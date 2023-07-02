@@ -1,58 +1,31 @@
 https://leetcode.com/problems/merge-intervals/description/
 
 
+
 class Solution {
 public:
-
-    vector<vector<int>> recMerge(vector<vector<int>> &intervals)
-    {
-        
-        int i=0;
-        int j=1;
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
 
         sort(intervals.begin(),intervals.end());
 
-        int n=intervals.size();
+        ans.push_back(intervals[0]);
 
-        vector<vector<int>> ans;
-
-        while(j<=n)
+        for(int i=1;i<intervals.size();i++)
         {
-            if(j<n && intervals[i][1]>=intervals[j][0] )
+            if(ans.back()[1]>=intervals[i][0])
             {
-                ans.push_back({min(intervals[i][0],intervals[j][0]),max(intervals[j][1],intervals[i][1])});
-                i++;
-                j++;
+                ans.back()[1]=max(ans.back()[1],intervals[i][1]);
             }
-            else
-                ans.push_back(intervals[i]);
 
-                i++;
-                j++;         
+            else
+            {
+                ans.push_back(intervals[i]);
+            }
         }
 
         return ans;
-
     }
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        
-            vector<vector<int>> ans;
-
-            ans=recMerge(intervals);
-
-            while(ans!=intervals)
-            {   
-                intervals=ans;
-                ans=recMerge(ans);
-            }
-
-            return ans;
-        
-   
-        return ans;
-    }
-
 };
-
 
 
