@@ -1,0 +1,28 @@
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+    unordered_map<int,int> mpp;
+    for(int i=0;i<nums.size();i++)
+    {
+        mpp[nums[i]]=i;
+    }
+    sort(nums.begin(),nums.end());
+    int left=0;
+    int right=nums.size()-1;
+    int sum;
+    while(left<right)
+    {   
+        sum=nums[left]+nums[right];
+        if(sum>target)
+        right--;
+        else if(sum<target)
+        left++;
+        else
+        return{mpp[nums[left]],mpp[nums[right]]};
+    }
+    return{};
+    }
+
+};
