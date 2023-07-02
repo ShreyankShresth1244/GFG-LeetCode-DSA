@@ -1,0 +1,34 @@
+Question Link - https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/#:~:text=Input%3A%20nums%20%3D%20%5B2%2C,no%20rotation)%20to%20make%20nums.
+
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+       
+       
+       int flag;
+       for(int i=0;i<nums.size();i++)
+       {    
+           flag=0;
+           int curr;
+            if(i+1==nums.size())
+            curr=0;
+            else
+            curr=i+1;
+           int prev=i;
+
+           while(curr!=i)
+           {
+               if(nums[prev]>nums[curr])
+               {
+                   flag=1;
+                   break;
+               }
+               curr=(curr+1)%nums.size();
+               prev=(prev+1)%nums.size();
+           }
+            if(flag==0)
+                return true;
+        }
+        return false;
+    }
+};
