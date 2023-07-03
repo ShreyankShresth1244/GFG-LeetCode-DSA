@@ -1,0 +1,68 @@
+https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1
+
+
+
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// } Driver Code Ends
+class Solution{
+public:
+    vector<int> findTwoElement(vector<int> arr, long long n) {
+         
+        long long sum=0;
+        
+        vector <int> ans;
+        
+        long long sumSquare=0;
+        
+        long long  Sn=(n*(n+1))/2;
+        
+        long long  SnSq =(n*(n+1)*(2*n+1))/6;
+        
+        for(int i=0;i<n;i++)
+        {
+            sum+=arr[i];
+            sumSquare+=(long long)arr[i]*(long long)arr[i];
+        }
+        
+        long long  sum1=Sn-sum;
+        
+        long long  sum2=SnSq-sumSquare;
+        
+        long long  num1= sum2/sum1;
+        
+        
+        long long  ans1=(num1+sum1)/2;
+        
+        long long ans2=ans1-sum1;
+
+        
+        
+        return {ans2,ans1};
+ 
+        
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+        Solution ob;
+        auto ans = ob.findTwoElement(a, n);
+        cout << ans[0] << " " << ans[1] << "\n";
+    }
+    return 0;
+}
+// } Driver Code Ends
