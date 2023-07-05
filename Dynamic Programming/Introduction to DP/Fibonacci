@@ -1,0 +1,63 @@
+https://practice.geeksforgeeks.org/problems/introduction-to-dp/1
+
+
+//{ Driver Code Starts
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// User function Template for C++
+
+class Solution {
+  public:
+  
+    long long int dp[100000];
+    
+    long long int topDown(int n) {
+       
+        if(n<=1)
+            return n;
+            
+        if(dp[n]!=0)
+        {
+            return dp[n]%1000000007;
+        }
+        
+        return dp[n]=(topDown(n-1)+topDown(n-2))%1000000007;
+    }
+    
+    long long int bottomUp(int n) {
+        
+        long long int dp1[n+1];
+        dp1[0]=0;
+        dp1[1]=1;
+        
+        for(int i=2;i<=n;i++)
+        {
+            dp1[i]=(dp1[i-1]+dp1[i-2])%1000000007;
+        }
+        
+        return dp1[n]%1000000007;
+        
+    }
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        Solution obj;
+        long long int topDownans = obj.topDown(n);
+        long long int bottomUpans = obj.bottomUp(n);
+        if (topDownans != bottomUpans) cout << -1 << "\n";
+        cout << topDownans << "\n";
+    }
+}
+// } Driver Code Ends
