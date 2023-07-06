@@ -22,7 +22,7 @@ public:
                 }
             else
             {
-                ans=(x*x)%MOD;
+                x=(x*x)%MOD;
                 n=n/2;
             }
         }
@@ -34,9 +34,9 @@ public:
 
     int countGoodNumbers(long long n) {
 
-        int even= n%2+n/2;
-        int odd=n/2;
+        long long even= n%2+n/2;
+        long long odd=n/2;
         
-        return getNum(5,even)*getNum(4,odd);
+        return (getNum(5,even)*getNum(4,odd))%MOD;
     }
 };
