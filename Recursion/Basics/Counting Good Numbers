@@ -1,0 +1,42 @@
+https://leetcode.com/problems/count-good-numbers/description/
+
+
+class Solution {
+public:
+    
+    const long MOD = 1000000007;
+
+    long long getNum(long long x,long long n)
+    {
+        if(n==0)
+            return 1;
+
+        long long ans=1;
+
+        while(n>0)
+        {
+            if(n%2==1)
+                {
+                    ans=(ans*x)%MOD;
+                    n=n-1;
+                }
+            else
+            {
+                ans=(x*x)%MOD;
+                n=n/2;
+            }
+        }
+
+        return ans%MOD;
+    }
+
+    
+
+    int countGoodNumbers(long long n) {
+
+        int even= n%2+n/2;
+        int odd=n/2;
+        
+        return getNum(5,even)*getNum(4,odd);
+    }
+};
