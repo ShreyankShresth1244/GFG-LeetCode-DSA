@@ -1,0 +1,40 @@
+https://leetcode.com/problems/generate-parentheses/description/
+
+
+class Solution {
+public:
+
+    void helper(int n,string str,vector<string> &brackets,int k1,int k2)
+    {
+        if(k1==n && k2==n)
+            {   
+                brackets.push_back(str);
+                return;
+            }
+
+        if(k1<n)
+            {
+                helper(n,str + "(",brackets,k1+1,k2);
+            }
+
+        if(k2<k1)
+            {
+                helper(n,str + ")",brackets,k1,k2+1);
+            }
+       
+    
+
+    }
+
+    vector<string> generateParenthesis(int n) {
+
+        vector<string> brackets;
+
+        string str="";
+
+        helper(n,str,brackets,0,0);
+
+        return brackets;
+
+    }
+};
