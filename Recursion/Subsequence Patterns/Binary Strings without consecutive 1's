@@ -1,0 +1,56 @@
+https://www.geeksforgeeks.org/generate-binary-strings-without-consecutive-1s/
+
+
+#include <iostream>
+using namespace std;
+
+void helper(int k,char str[],int n)
+{
+    if(n==k)
+    {
+        str[n]='\0';
+        cout<<str<< " ";
+        return;
+    }
+    
+    if(str[n-1]=='0')
+    {
+        str[n]='1';
+        helper(k,str,n+1);
+        
+        str[n]='0';
+        helper(k,str,n+1);
+    }
+    else if(str[n-1]='1')
+    {
+        str[n]='0';
+        helper(k,str,n+1);
+    }
+    
+}
+
+
+void getString(int k)
+{
+    if(k<=0)
+        return;
+    
+    char str[k];
+    
+    str[0]='0';
+    helper(k,str,1);
+    str[0]='1';
+    helper(k,str,1);
+    
+    return;
+}
+
+int main() {
+	int k;
+	
+	cin>>k;
+	
+	getString(k);
+	
+	return 0;
+}
