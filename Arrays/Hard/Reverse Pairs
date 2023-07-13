@@ -1,0 +1,83 @@
+https://leetcode.com/problems/reverse-pairs/description/
+
+
+class Solution {
+public:
+    void merge(vector<int> &ans,int low,int high,int mid)
+    {
+        int i = low;
+        int j = mid+1;
+
+        vector<int> vec;
+
+        while(i<=mid && j<=high)
+        {
+            if(ans[i]<=ans[j])
+                {
+                    vec.push_back(ans[i]);
+                    i++;
+                }
+            else
+                {
+                    vec.push_back(ans[j]);
+                    j++;
+                }
+        } 
+
+        while(i<=mid)
+        {
+            vec.push_back(ans[i]);
+            i++;
+        }
+
+        while(j<=high)
+        {
+            vec.push_back(ans[j]);
+            j++;
+        }
+
+        for(int m = low;m<=high;m++)
+        {
+            ans[m]=vec[m-low];
+        }
+    }
+
+
+int countPairs(vector<int> &ans,int low,int high,int mid)
+{
+    int i=low;
+    int j=mid+1;
+    int count=0;
+   
+   while(i<=mid)
+   { 
+    while(j<=high && ans[i]>2l*ans[j])
+    {
+        j++;
+    }
+    count+=(j-(mid+1));
+    i++;
+   }
+   return count;
+}   
+int mergeSort(vector<int> &ans,int low,int high)
+{
+    int count=0;
+    if(low>=high)
+        return count;
+
+    int mid=(low+high)/2;
+    count+=mergeSort(ans,low,mid);
+    count+=mergeSort(ans,mid+1,high);
+    count+=countPairs(ans,low,high,mid);
+    merge(ans,low,high,mid);
+    
+    return count;
+}
+
+
+    int reversePairs(vector<int>& nums) {
+        
+        return mergeSort(nums,0,nums.size()-1);
+    }
+};
