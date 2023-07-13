@@ -1,0 +1,45 @@
+https://leetcode.com/problems/minimum-average-difference/description/
+
+
+
+class Solution {
+public:
+    int minimumAverageDifference(vector<int>& nums) {
+        long totSum=0;
+
+        for(int i=0;i<nums.size();i++)
+        {
+            totSum+=nums[i];
+        }
+
+        long min =INT_MAX;
+        
+        long sum1=0;
+        long sum2=totSum;
+
+        int n =nums.size();
+
+        int ans=0;
+
+        for(int i=0;i<n;i++)
+        {
+            sum1+=nums[i];
+            sum2-=nums[i];
+
+            long avgDiff=0;
+
+            if(i!=n-1)
+                avgDiff = abs(sum1/(i+1) - sum2/(n-i-1));   
+            else
+                avgDiff = abs(sum1/(i+1)); 
+
+            if(avgDiff<min)
+                {
+                    min=avgDiff;
+                    ans=i;
+                }
+        }           
+
+        return ans;
+    }
+};
