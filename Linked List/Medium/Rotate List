@@ -1,0 +1,54 @@
+https://leetcode.com/problems/rotate-list/description/
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        
+        if(!head)
+            return head;
+
+        long size=0;
+
+        ListNode* last=head;
+        ListNode* temp=head;
+
+        while(last->next)
+        {   
+            last=last->next;
+            size++;
+        }
+
+        size++;
+
+        long rotate = size-(k%size);
+
+        if (rotate==size)
+            return head;
+
+        while(rotate!=1)
+        {
+            temp=temp->next;
+            rotate--;
+        }
+        
+        last->next=head;
+        head=temp->next;
+        temp->next=NULL;
+
+        return head;
+    }
+};
