@@ -1,0 +1,86 @@
+https://www.codingninjas.com/studio/problems/count-inversions_615
+
+
+#include <bits/stdc++.h> 
+using namespace std;
+
+void merge(long long *arr,int low,int high,int mid)
+{
+    int i=low;
+    int j=mid+1;
+
+    vector<int> temp;
+
+    while(i<=mid && j<= high)
+    {
+        if(arr[i]<arr[j])
+            {
+                temp.push_back(arr[i]);
+                i++;
+            }
+        else
+            {
+                temp.push_back(arr[j]);
+                j++;
+            }
+    }
+
+    while(i<=mid)
+    {
+        temp.push_back(arr[i]);
+        i++;
+    }
+
+    while(j<=high)
+    {
+        temp.push_back(arr[j]);
+        j++;
+    }
+
+    for(int m =low;m<=high ;m++)
+    {
+        arr[m]=temp[m-low];
+    }
+    
+}
+
+
+long long pairCount(long long *arr,int low,int high,int mid)
+{   
+    long long count=0;
+    int i=low;
+    int  j=mid+1;
+
+    while(i<=mid)
+    {
+        while(j<=high && arr[i]>arr[j])
+        {
+            j++;
+        }
+
+        count+=j-(mid+1);
+        i++;
+    }
+
+    return count;
+}
+
+
+long long mergeSort(long long *arr,int low,int high)
+{   
+    long long count=0;
+    if(low>=high)
+        return count;
+    int mid=(low+high)/2;
+    count+=mergeSort(arr,low,mid);
+    count+=mergeSort(arr,mid+1,high);
+    count+=pairCount(arr,low,high,mid);
+
+    merge(arr,low,high,mid);
+
+    return count;
+}
+
+long long getInversions(long long *arr, int n){
+    return mergeSort(arr,0,n-1);
+}
