@@ -1,0 +1,41 @@
+https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
+
+class Solution {
+public:
+    void getNum(vector<string> &given,vector<string> &ans,string temp,string &digits,int index)
+    {
+        if(index==digits.size())
+            {   
+                ans.push_back(temp);
+                return;
+            }
+
+         
+                int num = digits[index]-50;
+
+                for(auto itr : given[num])
+                {
+                    getNum(given,ans,temp+itr,digits,index+1);
+                }
+
+    }
+    
+    
+    
+    vector<string> letterCombinations(string digits) {
+
+        vector<string> given ={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+
+        vector<string> ans;
+        
+        if(digits.size()==0)
+            return ans;
+
+        string temp="";
+
+        getNum(given,ans,temp,digits,0);
+
+        return ans;
+    }
+};
