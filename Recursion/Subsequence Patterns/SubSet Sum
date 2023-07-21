@@ -1,0 +1,33 @@
+https://www.codingninjas.com/studio/problems/subset-sum_3843086?leftPanelTab=1
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+void getSum(vector<int> &num,vector<int> &ans,int ind,int sum,int n)
+{
+	if(ind==n)
+	{
+		ans.push_back(sum);
+
+		return;
+	}
+
+	getSum(num,ans,ind+1,sum+num[ind],n);
+
+	getSum(num,ans,ind+1,sum,n);
+
+}
+vector<int> subsetSum(vector<int> &num){
+
+	vector<int> ans;
+
+	getSum(num,ans,0,0,num.size());
+
+	sort(ans.begin(),ans.end());
+
+	return ans;
+	
+} 
