@@ -1,0 +1,44 @@
+https://leetcode.com/problems/combination-sum/description/
+
+
+class Solution {
+public:
+
+    void getSum(vector<vector<int>> &ans,vector<int> &ds,vector<int> &candidates,int ind, int n,int target)   
+    {
+        if(ind == n)
+        {
+            if(target==0)
+            {
+                ans.push_back(ds);
+
+            }
+
+            return;
+        }
+
+        if(candidates[ind]<=target)
+            {
+                    ds.push_back(candidates[ind]);
+                    getSum(ans,ds,candidates,ind,n,target-candidates[ind]);
+
+                     ds.pop_back();
+            }
+
+   
+
+        getSum(ans,ds,candidates,ind+1,n,target);
+
+        
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+
+        vector<int> ds;
+
+        getSum(ans,ds,candidates,0,candidates.size(),target);
+
+        return ans;
+    }
+};
