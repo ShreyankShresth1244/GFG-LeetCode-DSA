@@ -1,0 +1,43 @@
+https://leetcode.com/problems/subsets-ii/
+
+
+
+class Solution {
+public:
+    
+void getSum(vector<vector<int>> &ans,vector<int> &ds,vector<int> &num,int ind,int n)
+{
+        ans.push_back(ds);
+
+
+    for(int i =ind;i<num.size();i++)
+    {
+        if(i>ind && num[i]==num[i-1])
+            continue;
+        
+        ds.push_back(num[i]);
+
+        getSum(ans,ds,num,i+1,n);
+
+        ds.pop_back();
+    }
+
+    return;
+
+
+}
+    
+    
+vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        
+        sort(nums.begin(),nums.end());
+        
+        vector<vector<int>> ans;
+
+        vector<int> ds;
+
+        getSum(ans,ds,nums,0,nums.size());
+
+        return ans;
+    }
+};
