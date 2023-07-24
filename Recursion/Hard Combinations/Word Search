@@ -1,0 +1,50 @@
+Word Search
+
+
+
+
+
+class Solution {
+public:
+
+    bool wordSearch(vector<vector<char>>& board, string word,int ind,int i,int j)
+    {
+        if(ind==word.size())
+        {
+            return true;
+        }
+
+        if(i<0 || j<0 || i==board.size() || j==board[0].size() || board[i][j]=='!' || board[i][j] != word[ind] )
+            return false;
+
+        char check= board[i][j];
+
+        board[i][j]='!'; 
+        
+            bool a =(wordSearch(board,word,ind+1,i-1,j));
+                   
+            bool b = (wordSearch(board,word,ind+1,i,j-1));
+
+            bool c = (wordSearch(board,word,ind+1,i+1,j));
+              
+            bool d =  (wordSearch(board,word,ind+1,i,j+1));
+
+
+        board[i][j]=check;
+
+            return a|| b|| c|| d;
+
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        for(int i=0;i<board.size();i++)
+        {
+            for(int j=0;j<board[0].size();j++)
+            {
+                 if(board[i][j]==word[0] && wordSearch(board,word,0,i,j))
+                    return true;
+            }
+        }
+       return false;
+    }
+};
