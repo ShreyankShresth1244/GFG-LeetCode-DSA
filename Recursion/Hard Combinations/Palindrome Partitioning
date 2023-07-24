@@ -1,0 +1,68 @@
+https://leetcode.com/problems/palindrome-partitioning/
+
+
+
+class Solution {
+public:
+
+    bool checkPalin(vector<string> &ds)
+    {
+        for(int i=0;i<ds.size();i++)
+        {
+            for(int j=0;j<(ds[i].size()/2);j++)
+            {
+                if(ds[i][j]!=ds[i][ds[i].size()-j-1])
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
+
+    void isPalin(vector<vector<string>> &ans, string &s, int ind, vector<string> &ds)
+    {
+        if(ind==s.size())
+            {
+                if(checkPalin(ds))
+                    ans.push_back(ds);
+                
+                return;
+            }
+
+        string temp="x";
+        temp[0]=s[ind];
+        ds.push_back(temp);
+
+        isPalin(ans,s,ind+1,ds);
+        
+        ds.pop_back();
+
+        ds.back()+=s[ind];
+
+        isPalin(ans,s,ind+1,ds);
+
+
+    }
+
+    vector<vector<string>> partition(string s) {
+        
+        vector<vector<string>> ans;
+
+        vector<string> ds;
+
+        string temp="x";
+        temp[0]=s[0];
+        ds.push_back(temp);
+
+        if(s.size()==0)
+            return ans;
+
+        isPalin(ans,s,1,ds);
+
+
+        return ans;
+    }
+};
