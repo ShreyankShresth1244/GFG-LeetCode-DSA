@@ -1,0 +1,103 @@
+https://leetcode.com/problems/n-queens/description/
+
+
+
+class Solution {
+public:
+
+    bool check(int i,int j,vector<string> &ans,int n)
+    {
+        int p = i;
+        int q = j;
+
+        while(p>=0 && p<n  && q>=0 && q<n)
+        {   
+            p--;
+            q++;
+
+            if(p>=0 && q<n && ans[p][q]=='Q')
+                return false;
+        }
+
+        p=i;
+        q=j;
+
+        while(p>=0 && p<n  && q>=0 && q<n)
+        {
+            p--;
+            q--;
+
+            if(p>=0 && q>=0 && ans[p][q]=='Q')
+                return false;
+        }
+
+        p=i;
+        q=j;
+
+        while(p>=0 && p<n  && q>=0 && q<n)
+        {
+            p--;
+
+            if(p>=0 && ans[p][q]=='Q')
+                return false;
+        }
+
+        return true;
+    }
+
+    void Queen(vector<vector<string>> &ans,vector<string> &ds,int i,int n)
+    {
+        if(i==n)
+        {
+            ans.push_back(ds);
+            return;
+        }
+
+        
+            for(int k = 0; k<n ; k++)
+            {
+                if(check(i,k,ds,n))
+                    {   
+                        ds[i][k]='Q';
+                        Queen(ans,ds,i+1,n);
+                        ds[i][k]='.';
+                    }
+
+
+            }
+       
+
+
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        
+        
+        vector<vector<string>> ans;
+
+        if(n==2 || n==3)
+            return ans;
+
+        vector<string> ds;
+
+        string temp="";
+
+         for(int i=0;i<n;i++)
+         {     
+             temp="";
+
+             for(int j=0;j<n;j++)
+             {  
+                 temp+='.';
+             }
+
+             ds.push_back(temp);
+         }
+
+         
+
+        Queen(ans,ds,0,n);
+
+        return ans;
+
+    }
+};
