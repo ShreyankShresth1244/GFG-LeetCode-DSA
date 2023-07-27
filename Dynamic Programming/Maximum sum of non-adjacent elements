@@ -1,0 +1,30 @@
+https://www.codingninjas.com/studio/problems/maximum-sum-of-non-adjacent-elements_843261?leftPanelTab=2
+
+
+MEMOIZATION
+
+#include <bits/stdc++.h> 
+int maxSum(int n,vector<int> &dp,vector<int> &nums)
+{
+    if(n==0)
+        return nums[n];
+
+    if(dp[n]!=-1)
+        return dp[n];
+
+            int pick = nums[n]+maxSum(n-2,dp,nums);
+            int nonpick= maxSum(n-1,dp,nums);
+        
+    return dp[n]=max(pick,nonpick);
+}
+
+int maximumNonAdjacentSum(vector<int> &nums){
+    
+    vector<int> dp(nums.size()+1,-1);
+
+    return maxSum(nums.size()-1,dp,nums);
+
+}
+
+
+TABULATION
