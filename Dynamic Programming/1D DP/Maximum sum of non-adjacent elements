@@ -52,3 +52,33 @@ int maximumNonAdjacentSum(vector<int> &nums){
     return dp[nums.size()];
 
 }
+
+
+SPACE OPTIMIZATION( using prev2,prev,curr )
+
+#include <bits/stdc++.h> 
+
+int maximumNonAdjacentSum(vector<int> &nums){
+    
+
+    int prev2=0;
+    int prev=nums[0];
+    int curr=0;
+    for(int i=1;i<nums.size();i++)
+    {   
+        int pick=nums[i];
+
+        if(i>1)
+            pick +=prev2;
+
+        int notpick= prev;
+
+        curr=max(pick,notpick);
+
+        prev2=prev;
+        prev=curr;
+    }
+
+    return prev;
+
+}
