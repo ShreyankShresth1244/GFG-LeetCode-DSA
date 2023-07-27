@@ -1,0 +1,56 @@
+https://www.codingninjas.com/studio/problems/house-robber-ii_839733
+
+
+
+SPACE OPTIMIZED DP APPROACH
+
+#include <bits/stdc++.h> 
+
+long long int maxSum(vector<int> &nums)
+{   
+    int n=nums.size();
+    long long int prev2=0;
+    long long int prev=nums[0];
+    
+    for(int i=1;i<nums.size();i++)
+    {   
+        long long int pick = nums[i];
+
+        if(i>1)
+            pick+=prev2;
+        
+        int long long notpick = prev;
+
+        long long int curr = max(pick,notpick);
+
+        prev2=prev;
+        prev=curr;
+    }
+
+    return prev;
+
+}
+
+long long int houseRobber(vector<int>& valueInHouse)
+{
+    vector<int> arr1;
+    vector<int> arr2;
+
+    if(valueInHouse.size()==1)
+        return valueInHouse[0];
+
+    int n= valueInHouse.size();
+
+    for(int i=0;i<valueInHouse.size();i++)
+    {   
+        if(i!=0)
+        arr1.push_back(valueInHouse[i]);
+        if(i!=n-1)
+        arr2.push_back(valueInHouse[i]);
+    }
+
+    long long int max1=maxSum(arr1);
+    long long int max2=maxSum(arr2);
+
+    return max(max1,max2);
+}
