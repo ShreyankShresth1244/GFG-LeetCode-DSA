@@ -1,0 +1,39 @@
+https://leetcode.com/problems/rotate-string/description/
+
+
+
+class Solution {
+public:
+
+    void shiftString(string &temp)
+    {
+        char store = temp[0];
+
+        int n= temp.size();
+
+        for(int i=0;i<n-1;i++)
+        {
+            temp[i]=temp[i+1];
+        }
+
+        temp[n-1]=store;
+    }
+
+    bool rotateString(string s, string goal) {
+        
+        string temp=s;
+
+        if(s==goal)
+            return true;
+
+        for(int i=0;i<s.size();i++)
+        {   
+            shiftString(temp);
+
+            if(temp==goal)
+                return true;
+        }
+
+        return false;
+    }
+};
