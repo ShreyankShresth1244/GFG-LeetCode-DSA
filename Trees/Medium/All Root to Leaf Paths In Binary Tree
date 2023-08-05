@@ -1,0 +1,52 @@
+https://www.codingninjas.com/studio/problems/all-root-to-leaf-paths-in-binary-tree._983599?leftPanelTab=0
+
+
+
+/********************************************************************
+
+    Following is the Binary Tree node structure:
+
+    class BinaryTreeNode {
+        public :
+        int data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+    
+********************************************************************/
+void allPaths(vector<string> &ans, BinaryTreeNode<int> *root,string temp)
+{ 
+    
+ if(root->left==NULL && root->right==NULL)
+   {   
+       ans.push_back(temp);
+       return;
+   }
+   
+   if(root->left)
+        allPaths(ans,root->left,temp+" "+to_string(root->left->data));
+
+   if(root->right)
+        allPaths(ans,root->right,temp+" "+to_string(root->right->data));
+
+}
+
+vector <string> allRootToLeaf(BinaryTreeNode<int> * root) {
+    
+    vector<string> ans;
+
+    if(root==NULL)
+        return ans;
+
+    string temp  = to_string(root->data);
+
+    allPaths(ans,root,temp);
+
+    return ans;
+}
